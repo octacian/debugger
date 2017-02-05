@@ -37,12 +37,11 @@ local function get_editor_formspec(name)
 
   return [[
     size[20,12]
-    textarea[0,0;10.38,13.5;input;Form String (Separate elements with newline);]]..minetest.formspec_escape(form_string)..[[]
-    button[-0.26,11.62;4,1;refresh;Refresh and Save]
-    box[9.95,0;10,11.69;#FFFFFF00]
-    container[10,0]
+    box[-0.27,-0.3;13,12.68;#FFFFFF00]
     ]]..table.concat(output)..[[
-    container_end[]
+    textarea[13.03,-0.35;7.58,13.9;input;;]]..minetest.formspec_escape(form_string)..[[]
+    button[12.75,11.64;2.5,1;refresh;Refresh and Save]
+    label[15.3,11.8;Elements are separated by a newline.]
   ]]
 end
 
