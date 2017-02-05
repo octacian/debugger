@@ -1,1 +1,1 @@
-not_in_creative_inventory = 1
+not_in_creative = 1
