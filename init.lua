@@ -20,3 +20,8 @@ if Settings then
 else
   debugger.CREATIVE = 1
 end
+
+-- Load formspec editor
+if Settings.formspec_editor ~= false then
+  dofile(modpath.."/form_editor.lua")
+end
