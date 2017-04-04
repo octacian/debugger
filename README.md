@@ -5,6 +5,8 @@ This is meant to be a simple tool for developers to use while attempting to debu
 
 Future tools and/or buttons are hidden from the creative inventory by default. To allow access in creative rather than just via `/giveme`, set `not_in_creative` to `0` in the `config.txt`.
 
+For information about each individual feature, see the [documentation](https://github.com/octacian/debugger/tree/master/doc).
+
 ### Planned Features
 - [x] Meta/Inv Editor
 - [ ] Run Lua Code Under Environment (server won't crash)
