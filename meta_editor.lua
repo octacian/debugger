@@ -60,6 +60,7 @@ local forms = {
         size[10,5]
         label[0,0;Editing: ]]..key..[[]
         label[0,0.5;Old Value: ]]..value..[[]
+        button[8,0;2,1;delete;Delete]
         field[0.3,1.3;10,1;value;;]]..value..[[]
         button[0,2;2,1;back;< Back]
         button[2,2;2,1;save;Save]
@@ -75,6 +76,10 @@ local forms = {
       end
       if fields.save then
         minetest.get_meta(pos):set_string(meta.key, fields.value)
+        debugger.show_meta(name, "meta_main", true, pos)
+      end
+      if fields.delete then
+        minetest.get_meta(pos):set_string(meta.key, nil)
         debugger.show_meta(name, "meta_main", true, pos)
       end
     end,
