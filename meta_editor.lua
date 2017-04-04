@@ -28,7 +28,8 @@ local forms = {
       return [[
         size[10,10]
         tableoptions[highlight=#00000000]
-        table[-0.28,-0.29;4.7,10.7;keys;]]..keys..[[;1]
+        table[-0.28,-0.29;4.7,10.05;keys;]]..keys..[[;1]
+        button[-0.29,9.67;4.92,1;add;+ Add Key]
         tableoptions[highlight=#467832]
         table[4.4,-0.29;5.7,10.7;values;]]..values..[[;1]
       ]]
@@ -39,6 +40,9 @@ local forms = {
         if s[1] == "DCL" and tonumber(s[3]) ~= 0 then
           debugger.show_meta(name, "meta_change", true, tonumber(s[2]))
         end
+      end
+      if fields.add then
+        debugger.show_meta(name, "meta_add", true)
       end
     end,
   },
@@ -56,7 +60,7 @@ local forms = {
         size[10,5]
         label[0,0;Editing: ]]..key..[[]
         label[0,0.5;Old Value: ]]..value..[[]
-        field[0.3,1.3;9,1;value;;]]..value..[[]
+        field[0.3,1.3;10,1;value;;]]..value..[[]
         button[0,2;2,1;back;< Back]
         button[2,2;2,1;save;Save]
       ]]
@@ -72,6 +76,37 @@ local forms = {
       if fields.save then
         minetest.get_meta(pos):set_string(meta.key, fields.value)
         debugger.show_meta(name, "meta_main", true, pos)
+      end
+    end,
+  },
+  meta_add = {
+    get = function(name)
+      return [[
+        size[10,5]
+        label[0,0;Add new meta value]
+        field[0.3,1.3;10,1;key;Key;]
+        field[0.3,2.4;10,1;value;Value;]
+        button[0,3;2,1;cancel;< Cancel]
+        button[2,3;2,1;add;Add]
+      ]]
+    end,
+    handle = function(name, fields)
+      local meta = meta_contexts[name]
+      if not meta then return end
+      local pos  = meta.pos
+
+      if fields.cancel then
+        debugger.show_meta(name, "meta_main", true, pos)
+      end
+      if fields.add and fields.key and fields.value then
+        meta = minetest.get_meta(pos)
+        if meta:get_string(fields.key) == "" then
+          meta:set_string(fields.key, fields.value)
+          debugger.show_meta(name, "meta_main", true, pos)
+        else
+          minetest.chat_send_player(name, minetest.colorize("red", "Meta Editor Error: ")
+            .." key \""..fields.key.."\" already exists")
+        end
       end
     end,
   },
