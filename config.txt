@@ -1,2 +1,4 @@
 not_in_creative = 1
 formspec_editor = true
+meta_editor = true
+inv_editor = true

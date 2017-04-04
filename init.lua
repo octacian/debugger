@@ -25,3 +25,8 @@ end
 if Settings.formspec_editor ~= false then
   dofile(modpath.."/form_editor.lua")
 end
+
+-- Load meta/inv editor
+if Settings.meta_editor ~= false then
+  dofile(modpath.."/meta_editor.lua")
+end
